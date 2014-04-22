@@ -1,0 +1,3 @@
+The primary author of django_facebook_canvas_auth is Guillaume Pousseo 
+
+email: guillaumepousseo@revsquare.com
