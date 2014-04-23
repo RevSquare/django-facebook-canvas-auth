@@ -54,6 +54,17 @@ The you will need to declare the loaders you want to add in your settings.py fil
         'facebook-canvas-auth.middleware.FacebookCanvasAuth',
         ...
     )
+
+Finaly, you will need to declare the app urls in your main urls.py file (don't forget the social_auth app urls there as well!). For exemple:
+
+.. code-block::  python
+
+    urlpatterns = patterns('',
+        ...
+
+        url(r'^facebook_canvas_auth', include('facebook_canvas_auth.urls')),
+        ...
+    )  
     
 ******************
 Settings constants
