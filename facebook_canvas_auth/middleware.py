@@ -11,7 +11,7 @@ from social_auth.exceptions import AuthCanceled
 FACEBOOK_CANVAS_LOADING_MESSAGE = "Facebook authentication"
 
 
-class FacebookCanvasAuth(object, SocialAuthExceptionMiddleware):
+class FacebookCanvasAuth(SocialAuthExceptionMiddleware):
     """
     Middleware managing the facebook authentication via canvas.
     """
