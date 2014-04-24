@@ -45,7 +45,7 @@ class FacebookCanvasAuth(SocialAuthExceptionMiddleware):
             login_referer = request.COOKIES.get('login_referer')
             if not login_referer or 'page_proxy.php' in login_referer and \
                hasattr(settings, 'FACEBOOK_CANVAS_APP_TAB'):
-                login_referer = settings.APP_TAB
+                login_referer = settings.FACEBOOK_CANVAS_APP_TAB
 
             response = HttpResponseRedirect(login_referer)
             response.delete_cookie('login_referer')
