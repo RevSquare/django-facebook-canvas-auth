@@ -91,3 +91,33 @@ Usage exemple:
 .. code-block::  python
 
     FACEBOOK_CANVAS_APP_TAB = 'https://www.facebook.com/tabbApp/?sk=app_appnumber&ref=ts'
+    
+**************
+Extra template
+**************
+
+In order to ease integration, ther eis a template you can include to your base layout which imports the facebook javascript SDK. It is by default set in en_US locale. 
+
+In order to set it up, you need to do the following:
+
+1/ Setup the FECEBOOK_APP_ID constant in your settings.py
+
+.. code-block::  python
+
+    FACEBOOK_APP_ID = '123456789'
+
+2/ Add the following template processor so that the FACEBOOK_APP_ID is passed to all your tempaltes as the following variable facebook_app_id.
+
+.. code-block::  python
+
+    TEMPLATE_CONTEXT_PROCESSORS = (
+        ...
+        'facebook_canvas_auth.context_processors.get_facebook_app_id',
+        ...
+    )
+
+3/ Include the template partial in the template where you need to use it.
+
+.. code-block::  html
+
+    {% include 'facebook_canvas_auth/facebook-sdk.html' %}
