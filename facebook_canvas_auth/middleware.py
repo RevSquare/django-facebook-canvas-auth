@@ -36,7 +36,8 @@ class FacebookCanvasAuth(SocialAuthExceptionMiddleware):
                 loading_message = settings.FACEBOOK_CANVAS_LOADING_MESSAGE
             else:
                 loading_message = FACEBOOK_CANVAS_LOADING_MESSAGE
-            return HttpResponse(render_to_string('redirect.html',
+            return HttpResponse(render_to_string(
+                                'facebook_canvas_auth/redirect.html',
                                 {'redirection': redirection,
                                  'loading_message': loading_message}))
 
