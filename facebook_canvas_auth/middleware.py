@@ -11,6 +11,15 @@ from social_auth.exceptions import AuthCanceled
 FACEBOOK_CANVAS_LOADING_MESSAGE = "Facebook authentication"
 
 
+def get_redirect_url(request):
+    if 'django_adaptive' in settings.INSTALLED_APPS and \
+       hasattr(request, 'mobile') and request.mobile:
+        return settings.FACEBOOK_APP_URL
+    elif hasattr(settings, 'FACEBOOK_CANVAS_APP_TAB'):
+        return settings.FACEBOOK_CANVAS_APP_TAB
+    return ''
+
+
 class FacebookCanvasAuth(SocialAuthExceptionMiddleware):
     """
     Middleware managing the facebook authentication via canvas.
@@ -43,9 +52,10 @@ class FacebookCanvasAuth(SocialAuthExceptionMiddleware):
 
         if request.path.startswith('/accounts/profile'):
             login_referer = request.COOKIES.get('login_referer')
-            if hasattr(settings, 'FACEBOOK_CANVAS_APP_TAB') and \
+            alternate_login_referer = get_redirect_url(request)
+            if alternate_login_referer and \
                (not login_referer or 'page_proxy.php' in login_referer):
-                login_referer = settings.FACEBOOK_CANVAS_APP_TAB
+                login_referer = alternate_login_referer
 
             response = HttpResponseRedirect(login_referer)
             response.delete_cookie('login_referer')
